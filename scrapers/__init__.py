@@ -1,0 +1,2 @@
+from scrapers.princeton_scraper import princeton_scraper
+from scrapers.rutgers_scraper import rutgers_scraper
