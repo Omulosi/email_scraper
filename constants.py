@@ -4,7 +4,7 @@ DIRECTORIES = {
     'rutgers': 'https://search.rutgers.edu/people.html',
     'virginia tech': 'http://search.vt.edu/search/m/people.html',
     'stony brook': 'https://www.stonybrook.edu/search/people/',
-    'university of minnesota': 'https://myaccount.umn.edu/lookup?SET_INSTITUTION=UMNTC&type=name&CN={}&campus=a&role=any',
+    'university of minnesota': 'https://myaccount.umn.edu/lookup',
     'temple university': 'https://directory.temple.edu/'
 }
 

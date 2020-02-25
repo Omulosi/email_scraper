@@ -4,7 +4,6 @@ from urllib.parse import urljoin
 from lxml.html import fromstring
 
 import requests
-from throttle import Throttle
 from constants import USER_AGENT
 
 from selenium import webdriver
@@ -18,14 +17,11 @@ import os
 
 def get_driver():
     options = webdriver.ChromeOptions()
-    # options.add_experimental_option("prefs", {
-    #   "download.default_directory": download_dir,
-    #   "download.prompt_for_download": False,
-    #   "download.directory_upgrade": True,
-    #   "safebrowsing.enabled": True,
-    #   "plugins.always_open_pdf_externally": True
-    # })
-    options.add_argument("--disable-extensions")
+    options.add_experimental_option("prefs", {
+      "safebrowsing.enabled": True,
+    })
+    # options.add_argument("--disable-extensions")
+    options.add_argument("--enable-javascript")
     #options.add_argument("--headless")
 
     driver = webdriver.Chrome(chrome_options=options)

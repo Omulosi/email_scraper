@@ -1,15 +1,16 @@
-from scrapers.princeton_scraper import princeton_scraper
-from scrapers.rutgers_scraper import rutgers_scraper
+# from scrapers.princeton_scraper import princeton_scraper
+# from scrapers.rutgers_scraper import rutgers_scraper
 import scrapers
 import csv
 import pandas as pd
 
+
 def load_names():
-	print('Loading names...')
-	data = pd.read_excel('33000names.xlsx')
-	data = data.head(500)
-	print('Finish loading names...')
-	return data
+    print('Loading names...')
+    data = pd.read_excel('33000names.xlsx')
+    data = data.head(500)
+    print('Finish loading names...')
+    return data
 
 def parse_name(name):
     name = ' '.join([word for word in name.split() if len(word) > 1])
@@ -25,14 +26,20 @@ EMAILS = []
 
 for row in data.itertuples(index=False):
     name, institution = getattr(row, 'name'), getattr(row, 'company')
-    # if 'princeton' in institution.lower():
-    #     # extract email
-    #     email = scrapers.princeton_scraper(parse_name(name))
+    if 'princeton' in institution.lower():
+        # extract email
+        email = scrapers.princeton_scraper(parse_name(name))
+        EMAILS.append((name, institution, email))
+
+    # if 'rutgers' in institution.lower():
+    #     email = scrapers.rutgers_scraper(parse_name(name))
     #     EMAILS.append((name, institution, email))
 
-    if 'rutgers' in institution.lower():
-        email = scrapers.rutgers_scraper(parse_name(name))
+    if 'virginia tech' in institution.lower():
+        # extract email
+        email = scrapers.virginia_tech_scraper(parse_name(name))
         EMAILS.append((name, institution, email))
+
 
 #print(EMAILS)
 
