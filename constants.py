@@ -3,7 +3,7 @@ DIRECTORIES = {
     'princeton': 'https://www.princeton.edu/search',
     'rutgers': 'https://search.rutgers.edu/people.html',
     'virginia tech': 'http://search.vt.edu/search/m/people.html',
-    'stony brook': 'https://www.stonybrook.edu/search/people/',
+    'stony brook': 'https://adam.cc.sunysb.edu:8443/acc/new-dirsearch.cgi?name_string={}&status=Any',
     'university of minnesota': 'https://myaccount.umn.edu/lookup',
     'temple university': 'https://directory.temple.edu/'
 }
