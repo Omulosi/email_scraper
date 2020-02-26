@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from url_downloader import download, get_driver
+from url_downloader import get_driver
 from constants import DIRECTORIES 
 
 def virginia_tech_scraper(name):

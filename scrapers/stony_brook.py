@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import selenium
 
-from url_downloader import download, get_driver
+from url_downloader import get_driver
 from constants import DIRECTORIES 
 
 def stony_brook_scraper(name):

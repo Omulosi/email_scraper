@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from url_downloader import download, get_driver
+from url_downloader import get_driver
 from constants import DIRECTORIES  
 
 def rutgers_scraper(name):
@@ -26,8 +26,6 @@ def rutgers_scraper(name):
     driver.implicitly_wait(30)
     tree = fromstring(driver.page_source)
     email = tree.xpath('//div[contains(@id, "content")]//dd//a[contains(@href, "mailto")]/text()')
-    import pdb
-    pdb.set_trace()
     print('===> ', email)
     driver.quit()
     return email[0] if email else 'NA'
