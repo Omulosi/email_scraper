@@ -8,7 +8,7 @@ import pandas as pd
 def load_names():
     print('Loading names...')
     data = pd.read_excel('33000names.xlsx')
-    data = data.head(500)
+    data = data.head(1000)
     print('Finish loading names...')
     return data
 
@@ -26,18 +26,22 @@ EMAILS = []
 
 for row in data.itertuples(index=False):
     name, institution = getattr(row, 'name'), getattr(row, 'company')
-    if 'princeton' in institution.lower():
-        # extract email
-        email = scrapers.princeton_scraper(parse_name(name))
-        EMAILS.append((name, institution, email))
+    # if isinstance(institution, str) and 'princeton' in institution.lower():
+    #     # extract email
+    #     email = scrapers.princeton_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
 
-    # if 'rutgers' in institution.lower():
+    # if isinstance(institution, str) and 'rutgers' in institution.lower():
     #     email = scrapers.rutgers_scraper(parse_name(name))
     #     EMAILS.append((name, institution, email))
 
-    if 'virginia tech' in institution.lower():
+    # if isinstance(institution, str) and 'virginia tech' in institution.lower():
+    #     # extract email
+    #     email = scrapers.virginia_tech_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+    if isinstance(institution, str) and 'stony brook' in institution.lower():
         # extract email
-        email = scrapers.virginia_tech_scraper(parse_name(name))
+        email = scrapers.stony_brook_scraper(parse_name(name))
         EMAILS.append((name, institution, email))
 
 
