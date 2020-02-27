@@ -10,27 +10,31 @@ from selenium.webdriver.support import expected_conditions as EC
 import selenium
 
 from url_downloader import get_driver
-from utils import DIRECTORIES
+from utils import DIRECTORIES, split_name
 
-def rutgers_scraper(name):
+
+def temple_scraper(name):
     print('Saving ' + name + "'s email...")
-    query_link = DIRECTORIES.get('rutgers')
+    first_name, last_name = split_name(name)
+    query_link = DIRECTORIES.get('temple')
     driver = get_driver()
+    driver.delete_all_cookies()
     driver.get(query_link)
     driver.implicitly_wait(15)
-    driver.find_element_by_id('q').send_keys(
-        name + Keys.RETURN)
-    wait(driver, 30).until(
-        EC.frame_to_be_available_and_switch_to_it(driver.find_element_by_tag_name(
-            "iframe")
-        ))
-    time.sleep(10)
+    driver.find_element_by_id('templeedusn').send_keys(
+        last_name)
+    driver.find_element_by_id('templeedugivenname').send_keys(
+        first_name)
+    driver.find_element_by_css_selector('form input.Search').click()
+    driver.implicitly_wait(30)
     try:
-        email = driver.find_element_by_xpath('//div[contains(@id, "content")]//dd//a[contains(@href, "mailto")]')
+        email = driver.find_element_by_xpath('//div[contains(@id, "Div_Column_02")]//a[contains(@href, "mailto")]')
         email = email.text
         print(email)
     except selenium.common.exceptions.NoSuchElementException:
         email = None
+    driver.delete_all_cookies()
     driver.quit()
     return email if email else 'NA'
+
 

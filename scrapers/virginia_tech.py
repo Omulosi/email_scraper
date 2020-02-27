@@ -1,4 +1,3 @@
-
 from lxml.html import fromstring
 import requests
 from urllib.parse import urljoin, urlparse
@@ -10,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from url_downloader import get_driver
-from constants import DIRECTORIES 
+from utils import DIRECTORIES
 
 def virginia_tech_scraper(name):
     print('Saving ' + name + "'s email...")

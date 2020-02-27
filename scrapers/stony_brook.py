@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import selenium
 
 from url_downloader import get_driver
-from constants import DIRECTORIES 
+from utils import DIRECTORIES
 
 def stony_brook_scraper(name):
     print('Saving ' + name + "'s email...")

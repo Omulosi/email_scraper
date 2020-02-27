@@ -10,15 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import selenium
 
 from url_downloader import get_driver
-from constants import DIRECTORIES  
-
-
-def split_name(name):
-    # split name into first name and last name
-    name = name.split()
-    if len(name) > 1:
-        return name[0], name[-1]
-    return ' '.join(name)
+from utils import DIRECTORIES, split_name
 
 
 def delaware_scraper(name):

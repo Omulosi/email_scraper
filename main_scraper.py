@@ -9,7 +9,7 @@ def load_names():
     print('Loading names...')
     data = pd.read_excel('33000names.xlsx')
     data = data.head(1000)
-    print('Finish loading names...')
+    print('Finish loading names...\n')
     return data
 
 def parse_name(name):
@@ -28,28 +28,40 @@ EMAILS = []
 for row in data.itertuples(index=False):
     name, institution = getattr(row, 'name'), getattr(row, 'company')
     
-    if isinstance(institution, str) and 'princeton' in institution.lower():
+    # if isinstance(institution, str) and 'princeton' in institution.lower():
+    #     # extract email
+    #     email = scrapers.princeton_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+
+    # if isinstance(institution, str) and 'rutgers' in institution.lower():
+    #     email = scrapers.rutgers_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+
+    # if isinstance(institution, str) and 'virginia tech' in institution.lower():
+    #     # extract email
+    #     email = scrapers.virginia_tech_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+    # if isinstance(institution, str) and 'stony brook' in institution.lower():
+    #     # extract email
+    #     email = scrapers.stony_brook_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+
+    # if isinstance(institution, str) and 'delaware' in institution.lower():
+    #     # extract email
+    #     email = scrapers.delaware_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+
+    # if isinstance(institution, str) and 'temple' in institution.lower():
+    #     # extract email
+    #     email = scrapers.temple_scraper(parse_name(name))
+    #     EMAILS.append((name, institution, email))
+
+
+    if isinstance(institution, str) and 'minnesota' in institution.lower():
         # extract email
-        email = scrapers.princeton_scraper(parse_name(name))
+        email = scrapers.minnesota_scraper(parse_name(name))
         EMAILS.append((name, institution, email))
 
-    if isinstance(institution, str) and 'rutgers' in institution.lower():
-        email = scrapers.rutgers_scraper(parse_name(name))
-        EMAILS.append((name, institution, email))
-
-    if isinstance(institution, str) and 'virginia tech' in institution.lower():
-        # extract email
-        email = scrapers.virginia_tech_scraper(parse_name(name))
-        EMAILS.append((name, institution, email))
-    if isinstance(institution, str) and 'stony brook' in institution.lower():
-        # extract email
-        email = scrapers.stony_brook_scraper(parse_name(name))
-        EMAILS.append((name, institution, email))
-
-    if isinstance(institution, str) and 'delaware' in institution.lower():
-        # extract email
-        email = scrapers.delaware_scraper(parse_name(name))
-        EMAILS.append((name, institution, email))
 
 
 

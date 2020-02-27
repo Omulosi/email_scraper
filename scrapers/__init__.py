@@ -3,3 +3,5 @@ from scrapers.rutgers_scraper import rutgers_scraper
 from scrapers.virginia_tech import virginia_tech_scraper
 from scrapers.stony_brook import stony_brook_scraper
 from scrapers.delaware import delaware_scraper
+from scrapers.temple import temple_scraper
+from scrapers.minnesota import minnesota_scraper
