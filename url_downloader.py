@@ -22,7 +22,7 @@ def get_driver():
     # })
     options.add_argument("--disable-extensions")
     options.add_argument("--enable-javascript")
-    options.add_argument("--headless")
+    # options.add_argument("--headless")
 
     driver = webdriver.Chrome(chrome_options=options)
 

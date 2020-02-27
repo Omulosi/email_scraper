@@ -20,6 +20,7 @@ def parse_name(name):
             name = name.replace(title, '')
     return name
 
+
 data = load_names()
 
 EMAILS = []
@@ -44,6 +45,12 @@ for row in data.itertuples(index=False):
         # extract email
         email = scrapers.stony_brook_scraper(parse_name(name))
         EMAILS.append((name, institution, email))
+
+    if isinstance(institution, str) and 'delaware' in institution.lower():
+        # extract email
+        email = scrapers.delaware_scraper(parse_name(name))
+        EMAILS.append((name, institution, email))
+
 
 
 #print(EMAILS)
