@@ -10,9 +10,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from url_downloader import get_driver
 from utils import DIRECTORIES
+from cache import Cache
 
 def virginia_tech_scraper(name):
-    print('Saving ' + name + "'s email...")
+    print('Retrieving ' + name + "'s email...")
+    cache = Cache()
+    try:
+        email = cache[name]
+        return email
+    except KeyError:
+        pass
     query_link = DIRECTORIES.get('virginia tech')
     driver = get_driver()
     driver.get(query_link)
@@ -38,4 +45,7 @@ def virginia_tech_scraper(name):
             email = None
     time.sleep(2)
     driver.quit()
-    return email[0] if email else 'NA'
+    email = email[0] if email else None
+    if email is not None:
+        cache[name] = email
+    return email

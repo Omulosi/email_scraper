@@ -11,11 +11,18 @@ import selenium
 
 from url_downloader import get_driver
 from utils import DIRECTORIES
+from cache import Cache
 
 def minnesota_scraper(name):
-    print('Saving ' + name + "'s email...")
+    print('Retrieving ' + name + "'s email...")
     query_link = DIRECTORIES.get('minnesota')
     name = name.replace(" ", "+")
+    cache = Cache()
+    try:
+        email = cache[name]
+        return email
+    except KeyError:
+        pass
     query_link = query_link.format(name)
     driver = get_driver()
     driver.get(query_link)
@@ -25,4 +32,7 @@ def minnesota_scraper(name):
     email = tree.xpath('//table[contains(@class, "result__single-person")]//a[contains(@href, "mailto")]/text()')
     print(email)
     driver.quit()
-    return email[0] if email else 'NA'
+    email = email[0] if email else None
+    if email is not None:
+        cache[name] = email
+    return email

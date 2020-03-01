@@ -14,7 +14,7 @@ from utils import DIRECTORIES, split_name
 from cache import Cache
 
 
-def temple_scraper(name):
+def upenn_scraper(name):
     print('Retrieving ' + name + "'s email...")
     cache = Cache()
     try:
@@ -23,19 +23,19 @@ def temple_scraper(name):
     except KeyError:
         pass
     first_name, last_name = split_name(name)
-    query_link = DIRECTORIES.get('temple')
+    query_link = DIRECTORIES.get('upenn')
     driver = get_driver()
     driver.delete_all_cookies()
     driver.get(query_link)
     driver.implicitly_wait(15)
-    driver.find_element_by_id('templeedusn').send_keys(
+    driver.find_element_by_css_selector('input[name="lastName"]').send_keys(
         last_name)
-    driver.find_element_by_id('templeedugivenname').send_keys(
+    driver.find_element_by_xpath('//tr[4]//td//input').send_keys(
         first_name)
-    driver.find_element_by_css_selector('form input.Search').click()
+    driver.find_element_by_css_selector('form a.submitButton').click()
     driver.implicitly_wait(30)
     try:
-        email = driver.find_element_by_xpath('//div[contains(@id, "Div_Column_02")]//a[contains(@href, "mailto")]')
+        email = driver.find_element_by_xpath('//tr[contains(@class, "lookupbody")]//a[contains(@href, "mailto")]')
         email = email.text
         print(email)
     except selenium.common.exceptions.NoSuchElementException:

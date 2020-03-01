@@ -5,3 +5,7 @@ from scrapers.stony_brook import stony_brook_scraper
 from scrapers.delaware import delaware_scraper
 from scrapers.temple import temple_scraper
 from scrapers.minnesota import minnesota_scraper
+from scrapers.upenn import upenn_scraper
+from scrapers.drexel import drexel_scraper
+from scrapers.oak_ridge import oak_ridge_scraper
+from scrapers.michigan import michigan_scraper

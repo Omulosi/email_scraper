@@ -11,9 +11,16 @@ import selenium
 
 from url_downloader import get_driver
 from utils import DIRECTORIES
+from cache import Cache
 
 def stony_brook_scraper(name):
-    print('Saving ' + name + "'s email...")
+    print('Retrieving ' + name + "'s email...")
+    cache = Cache()
+    try:
+        email = cache[name]
+        return email
+    except KeyError:
+        pass
     query_link = DIRECTORIES.get('stony brook')
     name = name.replace(" ", "%20")
     query_link = query_link.format(name)
@@ -25,4 +32,7 @@ def stony_brook_scraper(name):
     email = tree.xpath('//tr[@class="data"]//a[@class="email"]/text()')
     print(email)
     driver.quit()
-    return email[0] if email else 'NA'
+    email = email[0] if email else None
+    if email is not None:
+        cache[name] = email
+    return email

@@ -5,41 +5,37 @@ import time
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait as wait
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import selenium
+from selenium.common.exceptions import NoSuchElementException
 
 from url_downloader import get_driver
 from utils import DIRECTORIES
 from cache import Cache
 
-def rutgers_scraper(name):
+def oak_ridge_scraper(name):
     print('Retrieving ' + name + "'s email...")
+    query_link = DIRECTORIES.get('oak ridge')
+    name = name.replace(" ", "+")
     cache = Cache()
     try:
         email = cache[name]
         return email
     except KeyError:
         pass
-    query_link = DIRECTORIES.get('rutgers')
+    query_link = query_link.format(name)
     driver = get_driver()
     driver.get(query_link)
-    driver.implicitly_wait(15)
-    driver.find_element_by_id('q').send_keys(
-        name + Keys.RETURN)
-    wait(driver, 30).until(
-        EC.frame_to_be_available_and_switch_to_it(driver.find_element_by_tag_name(
-            "iframe")
-        ))
-    time.sleep(10)
+    driver.implicitly_wait(20)
+    driver.find_element_by_css_selector('td.views-field-nothing a:nth-child(1)').click()
+    driver.implicitly_wait(10)
     try:
-        email = driver.find_element_by_xpath('//div[contains(@id, "content")]//dd//a[contains(@href, "mailto")]')
+        email = driver.find_element_by_xpath('//div[contains(@class, "staff-profile-contact-info")]//a[contains(@href, "mailto")]')
         email = email.text
         print(email)
-    except selenium.common.exceptions.NoSuchElementException:
+    except NoSuchElementException:
         email = None
     driver.quit()
-    email = email[0] if email else None
     if email is not None:
         cache[name] = email
     return email

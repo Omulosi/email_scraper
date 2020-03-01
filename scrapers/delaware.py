@@ -11,11 +11,17 @@ import selenium
 
 from url_downloader import get_driver
 from utils import DIRECTORIES, split_name
-
+from cache import Cache
 
 def delaware_scraper(name):
-    print('Saving ' + name + "'s email...")
+    print('Retrieving ' + name + "'s email...")
     first_name, last_name = split_name(name)
+    cache = Cache()
+    try:
+        email = cache[name]
+        return email
+    except KeyError:
+        pass
     query_link = DIRECTORIES.get('delaware')
     driver = get_driver()
     driver.get(query_link)
@@ -34,6 +40,6 @@ def delaware_scraper(name):
     except selenium.common.exceptions.NoSuchElementException:
         email = None
     driver.quit()
-    return email if email else 'NA'
-
-
+    email = email if email else None
+    cache[name] = email
+    return email
