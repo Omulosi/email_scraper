@@ -12,6 +12,7 @@
  ```
 
 > Important
+
 Ensure that the `chromedriver-binary` is of a version that matches your locally installed chrome
 browser version.
 
